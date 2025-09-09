@@ -89,6 +89,6 @@ app.get("/payment/:paymentId", async (req, res) => {
 });
 
 // Start Server
-app.listen(port, () => {
+app.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${port}`);
 });
