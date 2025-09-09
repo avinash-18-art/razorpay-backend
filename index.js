@@ -5,23 +5,19 @@ const Razorpay = require('razorpay');
 require('dotenv').config(); 
 
 const app = express();
-const PORT = process.env.PORT || 5000 
+const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors({
-  origin :"https://razorpay-nine-ashen.vercel.app",
-  methods:["GET","POST","PUT","DELETE"],
+  origin: ["https://razorpay-nine-ashen.vercel.app"], 
+  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
-
-app.use(cors({
-  origin:"*"
-}))
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Razorpay instance (You can switch to .env variables)
+// Razorpay instance
 const razorpay = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID || "rzp_test_9ViO0p7vRG2H3h",
   key_secret: process.env.RAZORPAY_KEY_SECRET || "i6ln8tvlorhr75TwQ31WlPzD"
@@ -41,7 +37,7 @@ app.post("/orders", async (req, res) => {
   }
 
   const options = {
-    amount: Number(amount), 
+    amount: Number(amount),
     currency,
     receipt: "receipt#1",
     payment_capture: 1
@@ -61,7 +57,7 @@ app.post("/orders", async (req, res) => {
   }
 });
 
-
+// Fetch Payment
 app.get("/payment/:paymentId", async (req, res) => {
   const { paymentId } = req.params;
 
@@ -90,5 +86,5 @@ app.get("/payment/:paymentId", async (req, res) => {
 
 // Start Server
 app.listen(PORT, () => {
-  console.log(`🚀 Server running at http://localhost:${port}`);
+  console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
